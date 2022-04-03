@@ -1,11 +1,11 @@
 use crate::sql::value::Value;
 
 pub struct IntValue {
-    val: u32,
+    val: i64,
 }
 
 impl IntValue {
-    pub fn new(val: u32) -> IntValue {
+    pub fn new(val: i64) -> IntValue {
         IntValue { val }
     }
 }

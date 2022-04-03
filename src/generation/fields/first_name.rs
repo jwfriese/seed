@@ -1,7 +1,7 @@
 use std::any::Any;
 
-use fake::Fake;
 use fake::locales::EN;
+use fake::Fake;
 
 use crate::generation::error::GenerationFieldError;
 use crate::generation::fields::FieldGenerator;
@@ -14,7 +14,7 @@ pub struct FirstNameGenerator {
 impl FirstNameGenerator {
     pub fn new(field_name: &str) -> FirstNameGenerator {
         FirstNameGenerator {
-            field_name: String::from(field_name)
+            field_name: String::from(field_name),
         }
     }
 
@@ -37,8 +37,8 @@ impl FieldGenerator for FirstNameGenerator {
 
 #[cfg(test)]
 mod tests {
-    use crate::generation::fields::FieldGenerator;
     use crate::generation::fields::first_name::FirstNameGenerator;
+    use crate::generation::fields::FieldGenerator;
     use crate::sql::QueryBuilder;
 
     #[test]

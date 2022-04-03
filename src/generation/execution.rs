@@ -12,14 +12,10 @@ pub fn execute(
 ) -> Option<GenerationTableError> {
     let get_generator = generators.get(table);
     match get_generator {
-        None => {
-            Some(
-                GenerationTableError::new(
-                    table,
-                    format!("No generator exists for table '{}'", table).as_str(),
-                )
-            )
-        }
+        None => Some(GenerationTableError::new(
+            table,
+            format!("No generator exists for table '{}'", table).as_str(),
+        )),
         Some(generator) => {
             let mut num_inserted_records = 0;
             let conn = db.get().unwrap();
@@ -29,9 +25,7 @@ pub fn execute(
                     Ok(sql_statement) => {
                         let result = sql_statement.run(&conn);
                         match result {
-                            None => {
-                                num_inserted_records += 1
-                            }
+                            None => num_inserted_records += 1,
                             Some(err) => {
                                 return Some(GenerationTableError::new(
                                     table,
@@ -46,12 +40,14 @@ pub fn execute(
                         }
                     }
                     Err(err) => {
-                        return Some(
-                            GenerationTableError::new(
-                                table,
-                                format!("Error generating insert statement for table '{}': {}", table, err).as_str(),
+                        return Some(GenerationTableError::new(
+                            table,
+                            format!(
+                                "Error generating insert statement for table '{}': {}",
+                                table, err
                             )
-                        );
+                            .as_str(),
+                        ));
                     }
                 }
             }

@@ -59,10 +59,6 @@ impl fmt::Debug for GenerationFieldError {
 
 impl fmt::Display for GenerationFieldError {
     fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
-        write!(
-            f,
-            "(field_type: {}, details: {})",
-            self.field_type, self.details
-        )
+        write!(f, "(details: {})", self.details)
     }
 }

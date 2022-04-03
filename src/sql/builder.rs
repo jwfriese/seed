@@ -1,5 +1,5 @@
-use crate::sql::{BoolValue, IntValue, StringValue};
 use crate::sql::value::Value;
+use crate::sql::{BoolValue, IntValue, StringValue};
 
 struct Field {
     name: String,
@@ -20,43 +20,47 @@ impl QueryBuilder {
     }
 
     pub fn push_string_field(&mut self, name: &str, value: &str) -> &mut QueryBuilder {
-        self.fields.push(
-            Field {
-                name: String::from(name),
-                value: Box::new(StringValue::new(String::from(value))),
-            }
-        );
+        self.fields.push(Field {
+            name: String::from(name),
+            value: Box::new(StringValue::new(String::from(value))),
+        });
         self
     }
 
-    pub fn push_int_field(&mut self, name: &str, value: u32) -> &mut QueryBuilder {
-        self.fields.push(
-            Field {
-                name: String::from(name),
-                value: Box::new(IntValue::new(value)),
-            }
-        );
+    pub fn push_int_field(&mut self, name: &str, value: i64) -> &mut QueryBuilder {
+        self.fields.push(Field {
+            name: String::from(name),
+            value: Box::new(IntValue::new(value)),
+        });
         self
     }
 
     pub fn push_bool_field(&mut self, name: &str, value: bool) -> &mut QueryBuilder {
-        self.fields.push(
-            Field {
-                name: String::from(name),
-                value: Box::new(BoolValue::new(value)),
-            }
-        );
+        self.fields.push(Field {
+            name: String::from(name),
+            value: Box::new(BoolValue::new(value)),
+        });
         self
     }
 
     pub fn finish(&self) -> String {
-        let field_names = self.fields.iter()
-            .map(|f| f.name.clone()).collect::<Vec<String>>().join(", ");
+        let field_names = self
+            .fields
+            .iter()
+            .map(|f| f.name.clone())
+            .collect::<Vec<String>>()
+            .join(", ");
         let values = &[
             "(",
-            self.fields.iter().map(|f| f.value.to_sql_element()).collect::<Vec<String>>().join(", ").as_str(),
-            ")"
-        ].join("");
+            self.fields
+                .iter()
+                .map(|f| f.value.to_sql_element())
+                .collect::<Vec<String>>()
+                .join(", ")
+                .as_str(),
+            ")",
+        ]
+        .join("");
 
         let fields_concat = &["(", field_names.as_str(), ") "].join("");
 
@@ -67,7 +71,8 @@ impl QueryBuilder {
             fields_concat,
             "VALUES ",
             values,
-        ].join("")
+        ]
+        .join("")
     }
 }
 
@@ -91,7 +96,7 @@ mod tests {
                 r#"(int_field, string_field, bool_field)"#,
                 r#"VALUES (10, 'this is a value', TRUE)"#,
             ]
-                .join(" ")
+            .join(" ")
         )
     }
 }

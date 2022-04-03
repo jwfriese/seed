@@ -1,9 +1,9 @@
 use std::any::Any;
 
-use fake::Fake;
-use fake::locales::EN;
 use crate::generation::error::GenerationFieldError;
 use crate::generation::fields::FieldGenerator;
+use fake::locales::EN;
+use fake::Fake;
 
 use crate::sql::QueryBuilder;
 
@@ -14,7 +14,7 @@ pub struct FullNameGenerator {
 impl FullNameGenerator {
     pub fn new(name: &str) -> FullNameGenerator {
         FullNameGenerator {
-            name: String::from(name)
+            name: String::from(name),
         }
     }
 

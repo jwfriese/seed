@@ -1,8 +1,5 @@
-use std::any::Any;
-use std::ops::Range;
-
-use fake::locales::EN;
 use fake::Fake;
+use std::any::Any;
 
 use crate::generation::error::GenerationFieldError;
 use crate::generation::fields::FieldGenerator;

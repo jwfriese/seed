@@ -1,7 +1,9 @@
+mod field_schema;
+
 use std::collections::HashMap;
 
+use crate::config::field_schema::FieldSchema;
 use serde::Deserialize;
-use serde_json::Map;
 
 use crate::generation::{
     EmailGenerator, FieldGenerator, FieldType, FirstNameGenerator, FullNameGenerator,
@@ -23,16 +25,6 @@ pub struct Config {
 pub struct TableSchema {
     pub name: String,
     pub fields: Vec<FieldSchema>,
-}
-
-#[derive(Deserialize, Clone)]
-pub struct FieldSchema {
-    name: String,
-    options: Option<Map<String, serde_json::Value>>,
-    references: Option<Map<String, serde_json::Value>>,
-
-    #[serde(alias = "type")]
-    type_: FieldType,
 }
 
 impl Config {
@@ -62,7 +54,7 @@ fn create_field_from_schema(f: &FieldSchema) -> Box<dyn FieldGenerator> {
         FieldType::FirstName => FirstNameGenerator::boxed_new(&f.name),
         FieldType::LastName => LastNameGenerator::boxed_new(&f.name),
         FieldType::Email => EmailGenerator::boxed_new(&f.name),
-        FieldType::Integer => IntegerGenerator::boxed_new(&f.name),
+        FieldType::Integer => IntegerGenerator::boxed_new(&f.name, f.options.as_ref()),
         FieldType::Timestamp => TimestampGenerator::boxed_new(&f.name),
         FieldType::Username => UsernameGenerator::boxed_new(&f.name),
         FieldType::Text => TextGenerator::boxed_new(&f.name),

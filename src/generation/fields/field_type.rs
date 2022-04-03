@@ -20,6 +20,34 @@ pub enum FieldType {
 
 impl fmt::Display for FieldType {
     fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
-        write!(f, "{}", self)
+        match self {
+            FieldType::FirstName => {
+                write!(f, "FirstName")
+            }
+            FieldType::LastName => {
+                write!(f, "LastName")
+            }
+            FieldType::FullName => {
+                write!(f, "FullName")
+            }
+            FieldType::Email => {
+                write!(f, "Email")
+            }
+            FieldType::Username => {
+                write!(f, "Username")
+            }
+            FieldType::Text => {
+                write!(f, "Text")
+            }
+            FieldType::Integer => {
+                write!(f, "Integer")
+            }
+            FieldType::Timestamp => {
+                write!(f, "Timestamp")
+            }
+            FieldType::UUID => {
+                write!(f, "UUID")
+            }
+        }
     }
 }

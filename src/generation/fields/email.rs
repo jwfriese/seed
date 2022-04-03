@@ -1,7 +1,7 @@
 use std::any::Any;
 
-use fake::Fake;
 use fake::locales::EN;
+use fake::Fake;
 
 use crate::generation::error::GenerationFieldError;
 use crate::generation::fields::FieldGenerator;
@@ -14,7 +14,7 @@ pub struct EmailGenerator {
 impl EmailGenerator {
     pub fn new(field_name: &str) -> EmailGenerator {
         EmailGenerator {
-            field_name: String::from(field_name)
+            field_name: String::from(field_name),
         }
     }
 

@@ -1,6 +1,6 @@
 use crate::generation::error::GenerationFieldError;
 use crate::generation::fields::FieldGenerator;
-use crate::sql::{Statement, QueryBuilder};
+use crate::sql::{QueryBuilder, Statement};
 
 pub struct TableGenerator {
     pub name: String,
@@ -9,10 +9,7 @@ pub struct TableGenerator {
 
 impl TableGenerator {
     pub fn new(name: String, fields: Vec<Box<dyn FieldGenerator>>) -> TableGenerator {
-        TableGenerator {
-            name,
-            fields,
-        }
+        TableGenerator { name, fields }
     }
 
     pub fn generate_statement(&self) -> Result<Statement, GenerationFieldError> {

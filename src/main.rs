@@ -12,6 +12,9 @@ mod generation;
 mod sql;
 mod str_util;
 
+#[cfg(test)]
+mod test_util;
+
 #[derive(Parser, Debug)]
 #[clap(author, version, about, long_about = None)]
 struct Args {

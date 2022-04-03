@@ -1,8 +1,8 @@
 use std::any::Any;
 
-use fake::Fake;
 use crate::generation::error::GenerationFieldError;
 use crate::generation::fields::FieldGenerator;
+use fake::Fake;
 
 use crate::sql::QueryBuilder;
 
@@ -13,7 +13,7 @@ pub struct UuidGenerator {
 impl UuidGenerator {
     pub fn new(field_name: &str) -> UuidGenerator {
         UuidGenerator {
-            field_name: String::from(field_name)
+            field_name: String::from(field_name),
         }
     }
 
@@ -36,8 +36,8 @@ impl FieldGenerator for UuidGenerator {
 
 #[cfg(test)]
 mod tests {
-    use crate::generation::fields::FieldGenerator;
     use crate::generation::fields::uuid::UuidGenerator;
+    use crate::generation::fields::FieldGenerator;
     use crate::sql::QueryBuilder;
 
     #[test]
